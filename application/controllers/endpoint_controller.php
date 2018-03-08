@@ -10,7 +10,7 @@ class Endpoint extends REST_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('eventos_model');
+        $this->load->model('endpoint_model');
         //$this->load->library('form_validation');
     }
 
@@ -21,7 +21,8 @@ class Endpoint extends REST_Controller
      */
     public function method_get()
     {
-        $result = $this->the_model->function();
+        // SELECT * FROM table
+        $result = $this->endpoint_model->list_table('table');
 
         if ($result['code'] == 0) {
             $this- > response([
@@ -63,7 +64,7 @@ class Endpoint extends REST_Controller
             'field_name' => $this->input->post('field_name'),
         ];
 
-        $result = $this->the_model->insert('table', $data);
+        $result = $this->endpoint_model->insert('table', $data);
 
         if ($result['code'] == 0) {
             $this- > response(
@@ -112,7 +113,7 @@ class Endpoint extends REST_Controller
             'field_name' => $this->input->post('field_name'),
         ];
 
-        $result = $this->the_model->update('table', $where, $data);
+        $result = $this->endpoint_model->update('table', $where, $data);
 
         if ($result['code'] == 0) {
             $this- > response(
@@ -165,7 +166,7 @@ class Endpoint extends REST_Controller
             'field_name' => $this->input->post('field_name'),
         ];
 
-        $result = $this->the_model->delete('table', $where);
+        $result = $this->endpoint_model->delete('table', $where);
 
         if ($result['code'] == 0) {
             $this- > response(
